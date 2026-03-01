@@ -30,3 +30,7 @@ bool is_operator(char c) {
 bool is_space(char c) {
   return c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r';
 }
+
+int char_to_digit(char c) {
+  return c - '0'; //  NOTE: Subtracting ASCII '0' (48) gives the actual integer value
+}
