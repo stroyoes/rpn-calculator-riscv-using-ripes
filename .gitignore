@@ -1,0 +1,8 @@
+# Ignore some asm specific files
+*.o
+*.out
+*.log
+
+# Ignore the folder with the c file 
+c_src/
+
