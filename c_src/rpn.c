@@ -34,3 +34,26 @@ bool is_space(char c) {
 int char_to_digit(char c) {
   return c - '0'; //  NOTE: Subtracting ASCII '0' (48) gives the actual integer value
 }
+
+int multiply(int a, int b) {
+  //  NOTE: No mul instruction in base RV32I so we use repeated addition instead
+  int result = 0;
+  int i = 0;
+  while (i < b) {
+    result = result + a;
+    i++;
+  }
+  return result;
+}
+
+int apply_operator(int a, int b, char op) {
+  switch (op) {
+    case '+': return a + b;
+    case '-': return a - b;
+    case '*': return multiply(a, b);
+    case '/': return b == 0 ? 0 : a / b;
+    default:  return 0;
+  }
+}
+
+
