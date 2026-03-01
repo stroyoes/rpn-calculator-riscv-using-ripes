@@ -3,6 +3,4 @@
 *.out
 *.log
 
-# Ignore the folder with the c file 
-c_src/
 
