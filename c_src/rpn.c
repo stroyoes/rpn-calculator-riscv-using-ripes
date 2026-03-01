@@ -56,4 +56,34 @@ int apply_operator(int a, int b, char op) {
   }
 }
 
+int evaluate_rpn(const char *expr) {
+  top = 0; // Reset stack
+
+  for (int i = 0; expr[i]; i++) {
+    char token = expr[i];
+
+    if (is_space(token))
+      continue; // Skip spaces between tokens
+
+    if (is_digit(token)) {
+      int num = 0;
+      while (is_digit(expr[i])) {
+        num = multiply(num, 10) + char_to_digit(expr[i]); //  NOTE: Build up multi-digit number left to right
+        i++;
+      }
+      push(num);
+      i--; // Backtrack so the outer loop doesn't skip the character after the number
+    } else if (is_operator(token)) {
+      int b = pop(); // Popped first — was pushed last (second operand)
+      int a = pop(); // Popped second — was pushed first (first operand)
+      //  NOTE: Order matters: "4 2 -" should give 4-2=2, not 2-4=-2
+
+      int result = apply_operator(a, b, token);
+      push(result);
+    }
+  }
+
+  return pop(); // The final remaining value is the answer
+}
+
 
